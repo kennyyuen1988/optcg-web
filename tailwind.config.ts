@@ -15,6 +15,9 @@ const config: Config = {
         'hero-image': "url('/images/nika_Luffy.svg')",
         'hero-title': "url('/images/opTcgTitle.png')",
       },
+      zIndex: {
+        '-1': '-1',
+      },
     },
   },
   plugins: [],

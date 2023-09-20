@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import {
   AppBar,
   Toolbar,
@@ -10,7 +11,7 @@ import {
   Avatar,
 } from '@mui/material';
 
-import Image from 'next/image';
+import { CardsComponent } from '@/app/features/cards/';
 
 interface Props {
   window?: () => Window;
@@ -55,16 +56,7 @@ const HideAppBar = () => {
       </HideOnScroll>
       <Toolbar />
       <Container>
-        <Box sx={{ my: 2 }} color={`black`}>
-          {[...new Array(12)]
-            .map(
-              () => `Cras mattis consectetur purus sit amet fermentum.
-  Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-  Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-  Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
-            )
-            .join('\n')}
-        </Box>
+        <CardsComponent />
       </Container>
     </>
   );

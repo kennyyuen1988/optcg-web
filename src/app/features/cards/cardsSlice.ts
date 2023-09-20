@@ -1,8 +1,5 @@
-// src/features/cards/cardsSlice.ts
-
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { RootState } from '../../store';
 
 // Define a type for the slice state
 interface CardsState {
@@ -20,8 +17,9 @@ const initialState: CardsState = {
 export const fetchCards = createAsyncThunk('cards/fetchCards', async () => {
   const response = await axios.get(
     'https://optcgbackend.onrender.com/api/data',
+    // 'http://localhost:3000/api/data',
   );
-  return response.data;
+  return response.data.results;
 });
 
 // Define the slice
