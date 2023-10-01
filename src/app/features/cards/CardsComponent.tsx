@@ -17,6 +17,13 @@ const CardsComponent: React.FC = () => {
     }
   }, []);
 
+  const formatCurrency = (price: number) => {
+    return new Intl.NumberFormat('zh-HK', {
+      style: 'currency',
+      currency: 'HKD',
+    }).format(price);
+  };
+
   return (
     <ImageList
       sx={{ width: `100%`, height: `100%` }}
@@ -24,18 +31,27 @@ const CardsComponent: React.FC = () => {
       rowHeight={`auto`}
     >
       <>
-        {cards.map((card) => {
-          return (
-            <ImageListItem key={card.id} className="m-8px">
-              <img
-                srcSet={`${card.imageurl}?w=215&h=300&fit=crop&auto=format&dpr=2 2x`}
-                src={`${card.imageurl}?w=215&h=300&fit=crop&auto=format`}
-                alt={`card`}
-                loading="lazy"
-              />
-            </ImageListItem>
-          );
-        })}
+        {cards.length > 0 &&
+          cards.map((card) => {
+            return (
+              <div key={card.id} style={{ color: `#000` }}>
+                <ImageListItem key={card.card_id} className="m-8px">
+                  <img
+                    srcSet={`https://www.onepiece-cardgame.com/images/cardlist/card/${card.card_id}.png?w=215&h=300&fit=crop&auto=format&dpr=2 2x`}
+                    // src={`${card.imageurl}?w=215&h=300&fit=crop&auto=format`}
+                    src={`https://www.onepiece-cardgame.com/images/cardlist/card/${card.card_id}.png?w=215&h=300&fit=crop&auto=format`}
+                    alt={`card`}
+                    loading="lazy"
+                  />
+                </ImageListItem>
+                <div>{card.name}</div>
+                <div>{card.card_id}</div>
+                <div>
+                  <b>{formatCurrency(card.price)}</b>
+                </div>
+              </div>
+            );
+          })}
       </>
     </ImageList>
   );
