@@ -6,7 +6,15 @@ import { AppDispatch, RootState } from '@/app/store';
 
 import { fetchCards } from './cardsSlice';
 
-const CardsComponent: React.FC = () => {
+interface CardsComponentProps {
+  isShowName?: false;
+  isShowCardId?: false;
+}
+
+const CardsComponent: React.FC<CardsComponentProps> = ({
+  isShowName,
+  isShowCardId,
+}) => {
   const dispatch = useDispatch<AppDispatch>();
   const cards = useSelector((state: RootState) => state.cards.entities);
   const loading = useSelector((state: RootState) => state.cards.loading);
@@ -21,6 +29,8 @@ const CardsComponent: React.FC = () => {
     return new Intl.NumberFormat('zh-HK', {
       style: 'currency',
       currency: 'HKD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
     }).format(price);
   };
 
@@ -44,8 +54,8 @@ const CardsComponent: React.FC = () => {
                     loading="lazy"
                   />
                 </ImageListItem>
-                <div>{card.name}</div>
-                <div>{card.card_id}</div>
+                {isShowName && <div>{card.name}</div>}
+                {isShowCardId && <div>{card.card_id}</div>}
                 <div>
                   <b>{formatCurrency(card.price)}</b>
                 </div>
